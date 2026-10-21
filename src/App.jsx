@@ -1,22 +1,187 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { Download, RotateCcw, RotateCw, Tag, Mouse, PanelLeft, X, ArrowUpRight, Info, Check } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { BrainCircuit, Check, Download, Info, PanelLeft } from 'lucide-react';
 import { Viewer } from './Viewer';
 import { Assembly } from './Assembly';
 import { Inspector } from './Inspector';
 import { PowerPath } from './PowerPath';
+import { Controls } from './Controls';
+import { AboutDialog } from './AboutDialog';
+import { AIExplorer } from './AIExplorer';
+import { AI_PHASES, getFilteredOpportunities } from './aiData';
 import { byId, components, steps } from './data';
-const toggleSet=(set,id)=>{const next=new Set(set);if(next.has(id))next.delete(id);else next.add(id);return next;};
-export default function App(){
- const[selected,setSelected]=useState('T1'),[explosion,setExplosion]=useState(0),[hidden,setHidden]=useState(new Set()),[extracted,setExtracted]=useState(new Set()),[isolated,setIsolated]=useState(null),[rotate,setRotate]=useState(false),[labels,setLabels]=useState(true),[view,setView]=useState('iso'),[drawer,setDrawer]=useState(false),[about,setAbout]=useState(false),[tab,setTab]=useState('overview'),[step,setStep]=useState(0),[exporting,setExporting]=useState(false),[notice,setNotice]=useState('');
- const viewer=useRef(null),closeButton=useRef(null),previousFocus=useRef(null);
- const select=useCallback(id=>{setSelected(id);setDrawer(false);setIsolated(p=>p&&p!==id?id:p);},[]);
- const reset=useCallback(()=>{setExplosion(0);setHidden(new Set());setExtracted(new Set());setIsolated(null);setRotate(false);setView('iso');setTimeout(()=>viewer.current?.preset('iso'),0);},[]);
- const changeView=v=>{setView(v);viewer.current?.preset(v);};
- const setStage=i=>{setStep(i);setSelected(steps[i].part);setHidden(new Set());setIsolated(null);setExtracted(new Set());};
- useEffect(()=>{const key=e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)||about||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==='Escape'){setDrawer(false);setIsolated(null);return;}if(e.key.toLowerCase()==='x')setExtracted(s=>toggleSet(s,selected));if(e.key.toLowerCase()==='h')setHidden(s=>toggleSet(s,selected));if(e.key.toLowerCase()==='i')setIsolated(s=>s?null:selected);if(e.key.toLowerCase()==='r')reset();if(e.key.toLowerCase()==='e'){setExplosion(s=>s>.5?0:1);setTimeout(()=>viewer.current?.preset('iso'),0);}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key);},[selected,reset,about]);
- useEffect(()=>{if(!notice)return;const t=setTimeout(()=>setNotice(''),4500);return()=>clearTimeout(t);},[notice]);
- useEffect(()=>{if(!about)return;previousFocus.current=document.activeElement;closeButton.current?.focus();const key=e=>{if(e.key==='Escape')setAbout(false);if(e.key==='Tab'){const elements=[...document.querySelectorAll('.about-dialog button,.about-dialog a')];if(e.shiftKey&&document.activeElement===elements[0]){e.preventDefault();elements.at(-1)?.focus();}else if(!e.shiftKey&&document.activeElement===elements.at(-1)){e.preventDefault();elements[0]?.focus();}}};document.addEventListener('keydown',key);return()=>{document.removeEventListener('keydown',key);previousFocus.current?.focus();};},[about]);
- async function exportModel(){setExporting(true);try{const data=await viewer.current.exportModel();const url=URL.createObjectURL(new Blob([data],{type:'model/gltf-binary'}));const a=document.createElement('a');a.href=url;a.download='flux-dab-converter.glb';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);setNotice('GLB exported with all 29 named components.');}catch(e){console.error(e);setNotice('Model export failed. Please reload the viewer and try again.');}finally{setExporting(false);}}
- const explode=Number(explosion);
- return <div className="app"><header className="topbar"><a className="brand" href="/" aria-label="FLUX Hardware Lab home"><svg width="25" height="30" viewBox="0 0 25 30" aria-hidden="true"><path d="M2 2h23l-5 6H8v5h12l-5 6H8v9H2Z" fill="currentColor"/></svg><b>FLUX</b><span>/</span><small>Hardware Lab</small></a><nav aria-label="Main navigation"><button className="nav-active" onClick={()=>{setAbout(false);setTab('overview');}}>Explorer</button><button onClick={()=>setAbout(true)}>How it works</button><button className="export-button" aria-label={exporting?'Exporting model':'Export model'} disabled={exporting} onClick={exportModel}><Download size={16}/><span>{exporting?'Exporting…':'Export model'}</span></button></nav></header><div className="workspace"><Assembly selected={selected} onSelect={select} hidden={hidden} extracted={extracted} open={drawer} onClose={()=>setDrawer(false)} onReset={reset}/>{drawer?<button className="drawer-backdrop" onClick={()=>setDrawer(false)} aria-label="Close component drawer"/>:null}<main className={`explorer ${tab==='path'?'with-path':''}`}><div className="canvas-heading"><div><button className="mobile-assembly" onClick={()=>setDrawer(true)}><PanelLeft size={16}/> Assembly</button><h1>Power, taken apart.</h1><p>Explore the hardware behind isolated power conversion.</p></div><div className="concept-rating"><strong>400 V ↔ 48 V</strong><span>Concept architecture</span></div></div><Viewer ref={viewer} selected={selected} explosion={explode} hidden={hidden} extracted={extracted} isolated={isolated} rotate={rotate} labels={labels} onSelect={select}/><div className="inspector-wrap"><Inspector part={byId[selected]} hidden={hidden.has(selected)} extracted={extracted.has(selected)} isolated={isolated===selected} onHide={()=>setHidden(s=>toggleSet(s,selected))} onExtract={()=>setExtracted(s=>toggleSet(s,selected))} onIsolate={()=>{setHidden(s=>{const n=new Set(s);n.delete(selected);return n;});setIsolated(s=>s?null:selected);}} onFocus={()=>viewer.current?.focus()}/></div><div className="scene-status"><span className="status-dot"/>{isolated?'1 part isolated':`${components.length-hidden.size} of ${components.length} parts visible`}{extracted.size>0?<span> · {extracted.size} pulled out</span>:null}</div><div className="axis" aria-hidden="true"><span className="axis-y">Y</span><span className="axis-z">Z</span><span className="axis-x">X</span><svg width="60" height="60"><path d="M20 40V7M20 40l29-11M20 40l25 14" fill="none" strokeWidth="2" stroke="#7d9990"/><circle cx="20" cy="40" r="3" fill="#117766"/></svg></div><div className="bottom-controls"><div className="control-dock"><div className="explosion-control"><button className={!explode?'active-text':''} onClick={()=>{setExplosion(0);setTimeout(()=>viewer.current?.preset(view),0);}}>Assembled</button><input type="range" min="0" max="1" step="0.01" value={explode} onChange={e=>setExplosion(Number(e.target.value))} onPointerUp={()=>{if(explode>.4)viewer.current?.preset(view);}} onKeyUp={()=>{if(explode>.4)viewer.current?.preset(view);}} aria-label="Explode assembly" style={{'--progress':`${explode*100}%`}}/><button className={explode===1?'active-text':''} onClick={()=>{setExplosion(1);setTimeout(()=>viewer.current?.preset(view),0);}}>Exploded</button></div><span className="dock-divider"/><button className={`dock-button ${rotate?'active':''}`} onClick={()=>setRotate(!rotate)} aria-pressed={rotate} title="Auto rotate"><RotateCw size={18}/><span>Rotate</span></button><button className={`icon-button label-toggle ${labels?'active':''}`} onClick={()=>setLabels(!labels)} aria-pressed={labels} title="Toggle component labels" aria-label="Toggle component labels"><Tag size={17}/></button><span className="dock-divider"/><div className="view-presets" aria-label="Camera views">{[['iso','3D'],['top','Top'],['front','Front']].map(([id,name])=><button key={id} className={view===id?'selected':''} onClick={()=>changeView(id)} aria-pressed={view===id}>{name}</button>)}</div><button className="icon-button reset-button" onClick={reset} title="Reset assembly (R)" aria-label="Reset assembly"><RotateCcw size={17}/></button></div><div className="orbit-hint"><Mouse size={16}/><span>Drag to orbit <i>·</i> Scroll to zoom <i>·</i> Click to inspect</span></div></div>{tab==='path'?<PowerPath step={step} onStep={setStage} onClose={()=>setTab('overview')}/>:null}</main></div><footer className="app-footer"><div role="tablist" aria-label="Explorer mode"><button role="tab" aria-selected={tab==='overview'} className={tab==='overview'?'selected':''} onClick={()=>setTab('overview')}>Overview</button><button role="tab" aria-selected={tab==='path'} className={tab==='path'?'selected':''} onClick={()=>{setTab('path');setStage(step);}}>Power path</button></div><p>Illustrative model <span>·</span> Not a fabrication design.</p><button className="footer-info icon-button" onClick={()=>setAbout(true)} aria-label="About this model"><Info size={17}/></button></footer>{notice?<div className="toast" role="status"><Check size={17}/>{notice}</div>:null}{about?<div className="modal-backdrop" onClick={e=>{if(e.target===e.currentTarget)setAbout(false);}}><section className="about-dialog" role="dialog" aria-modal="true" aria-labelledby="about-title"><button ref={closeButton} className="icon-button modal-close" aria-label="Close explanation" onClick={()=>setAbout(false)}><X/></button><div className="about-mark">F</div><h2 id="about-title">A closer look at conversion.</h2><p>This conceptual 3 kW dual active bridge (DAB) links a 400 V DC bus and a 48 V DC bus through a high-frequency transformer.</p><div className="about-diagram"><span>400 V<br/><b>HV bridge</b></span><span>↔</span><span>Transfer L<br/><b>Transformer</b></span><span>↔</span><span>48 V<br/><b>LV bridge</b></span></div><p>Both bridges switch actively. Their relative phase shift controls transferred power and its direction. Four dual-channel driver boards represent eight gate channels. A separate control card coordinates switching.</p><h3>Make it your own view.</h3><div className="shortcut-grid"><span><kbd>E</kbd> Explode / assemble</span><span><kbd>X</kbd> Pull out selected part</span><span><kbd>I</kbd> Isolate selected part</span><span><kbd>H</kbd> Hide / show part</span><span><kbd>R</kbd> Reset assembly</span><span>Right-drag to pan</span></div><p className="model-note">Dimensions, routing, operating targets and thermal interfaces are illustrative. This is an educational model, with no simulated performance or validated safety, thermal or EMI results.</p><a href="https://www.ti.com/tool/TIDA-010054" target="_blank" rel="noreferrer">Read TI’s DAB topology reference <ArrowUpRight size={15}/></a><small className="reference-note">A separate 10 kW reference design; this model does not reproduce it.</small><button className="primary start-tour" onClick={()=>{setAbout(false);setTab('path');setStage(0);}}>Explore the power path <ArrowUpRight size={16}/></button></section></div>:null}</div>;
+
+const EMPTY_TARGETS = [];
+const toggleSet = (set, id) => {
+  const next = new Set(set);
+  if (next.has(id)) next.delete(id); else next.add(id);
+  return next;
+};
+const reveal = (set, ids) => new Set([...set].filter(id => !ids.includes(id)));
+
+export default function App() {
+  const [selected, setSelected] = useState('T1');
+  const [explosion, setExplosion] = useState(0);
+  const [hidden, setHidden] = useState(new Set());
+  const [extracted, setExtracted] = useState(new Set());
+  const [isolated, setIsolated] = useState(null);
+  const [rotate, setRotate] = useState(false);
+  const [labels, setLabels] = useState(true);
+  const [view, setView] = useState('iso');
+  const [drawer, setDrawer] = useState(false);
+  const [about, setAbout] = useState(false);
+  const [tab, setTab] = useState(() => new URLSearchParams(window.location.search).get('mode') === 'ai' ? 'ai' : 'overview');
+  const [step, setStep] = useState(0);
+  const [exporting, setExporting] = useState(false);
+  const [notice, setNotice] = useState('');
+  const [aiActiveId, setAIActiveId] = useState('magnetic-model');
+  const [aiPhase, setAIPhase] = useState('all');
+  const [aiScope, setAIScope] = useState('part');
+  const viewer = useRef(null);
+  const aiMode = tab === 'ai';
+
+  // Resolve the active application from exactly the same scope as the panel.
+  // Empty filters produce no highlights; an obsolete active ID cannot linger.
+  const aiChoices = useMemo(() => getFilteredOpportunities({ phase: aiPhase, partId: aiScope === 'part' ? selected : null }), [aiPhase, aiScope, selected]);
+  const activeAI = aiChoices.find(item => item.id === aiActiveId) || aiChoices[0] || null;
+  const aiColor = AI_PHASES.find(item => item.id === activeAI?.phase)?.color || '#397ca4';
+  const highlightedIds = aiMode && activeAI ? activeAI.partIds : EMPTY_TARGETS;
+
+  const select = useCallback(id => {
+    setSelected(id); setDrawer(false);
+    setHidden(current => reveal(current, [id]));
+    if (aiMode) { setAIScope('part'); setIsolated(null); }
+    else setIsolated(current => current && current !== id ? id : current);
+  }, [aiMode]);
+
+  const chooseAI = useCallback(opportunity => {
+    setAIActiveId(opportunity.id);
+    setSelected(current => opportunity.partIds.includes(current) ? current : opportunity.partIds[0]);
+    setHidden(current => reveal(current, opportunity.partIds));
+    setIsolated(null);
+  }, []);
+
+  const changeAIPhase = phase => {
+    setAIPhase(phase);
+    const choices = getFilteredOpportunities({ phase, partId: aiScope === 'part' ? selected : null });
+    const next = choices.find(item => item.id === aiActiveId) || choices[0];
+    if (next) chooseAI(next); else setAIActiveId('');
+  };
+  const changeAIScope = scope => {
+    setAIScope(scope);
+    const choices = getFilteredOpportunities({ phase: aiPhase, partId: scope === 'part' ? selected : null });
+    const next = choices.find(item => item.id === aiActiveId) || choices[0];
+    if (next) chooseAI(next); else setAIActiveId('');
+  };
+  const enterAI = useCallback(() => {
+    setAbout(false); setTab('ai'); setIsolated(null);
+    setHidden(current => reveal(current, [selected]));
+  }, [selected]);
+  const closeAbout = useCallback(() => setAbout(false), []);
+  const reset = useCallback(() => {
+    setExplosion(0); setHidden(new Set()); setExtracted(new Set());
+    setIsolated(null); setRotate(false); setView('iso');
+    requestAnimationFrame(() => viewer.current?.preset('iso'));
+  }, []);
+  const changeView = next => { setView(next); viewer.current?.preset(next); };
+  const setStage = index => {
+    setStep(index); setSelected(steps[index].part);
+    setHidden(new Set()); setIsolated(null); setExtracted(new Set());
+  };
+  const toggleIsolation = () => {
+    setHidden(current => reveal(current, [selected]));
+    setIsolated(current => current ? null : selected);
+  };
+  const focusAI = () => {
+    if (!activeAI) return;
+    setHidden(current => reveal(current, activeAI.partIds)); setIsolated(null);
+    requestAnimationFrame(() => viewer.current?.focusParts(activeAI.partIds));
+  };
+  const startTour = () => { setAbout(false); setTab('path'); setStage(0); };
+
+  useEffect(() => {
+    const key = event => {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName) || about || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.key === 'Escape') { setDrawer(false); setIsolated(null); return; }
+      switch (event.key.toLowerCase()) {
+        case 'x': setExtracted(current => toggleSet(current, selected)); break;
+        case 'h': setHidden(current => toggleSet(current, selected)); break;
+        case 'i': setHidden(current => reveal(current, [selected])); setIsolated(current => current ? null : selected); break;
+        case 'r': reset(); break;
+        case 'e': setExplosion(current => current > .5 ? 0 : 1); break;
+        default: break;
+      }
+    };
+    window.addEventListener('keydown', key);
+    return () => window.removeEventListener('keydown', key);
+  }, [selected, reset, about]);
+  useEffect(() => {
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(''), 4500);
+    return () => clearTimeout(timer);
+  }, [notice]);
+
+  async function exportModel() {
+    setExporting(true);
+    try {
+      const data = await viewer.current.exportModel();
+      const url = URL.createObjectURL(new Blob([data], { type: 'model/gltf-binary' }));
+      const link = document.createElement('a'); link.href = url; link.download = 'flux-dab-converter.glb'; link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      setNotice(`GLB exported with all ${components.length} named components.`);
+    } catch (error) {
+      console.error(error); setNotice('Model export failed. Please reload the viewer and try again.');
+    } finally { setExporting(false); }
+  }
+
+  const highlightedVisible = highlightedIds.filter(id => !hidden.has(id) && (!isolated || isolated === id)).length;
+  return <div className="app">
+    <header className="topbar">
+      <a className="brand" href="/" aria-label="FLUX Hardware Lab home"><svg width="25" height="30" viewBox="0 0 25 30" aria-hidden="true"><path d="M2 2h23l-5 6H8v5h12l-5 6H8v9H2Z" fill="currentColor" /></svg><b>FLUX</b><span>/</span><small>Hardware Lab</small></a>
+      <nav aria-label="Main navigation">
+        <button className={!aiMode ? 'nav-active' : ''} onClick={() => { setAbout(false); setTab('overview'); }}>Explorer</button>
+        <button className={`nav-ai ${aiMode ? 'nav-active' : ''}`} onClick={enterAI}><BrainCircuit size={15} /><span>AI opportunities</span></button>
+        <button className="nav-about" onClick={() => setAbout(true)}>How it works</button>
+        <button className="export-button" aria-label={exporting ? 'Exporting model' : 'Export model'} disabled={exporting} onClick={exportModel}><Download size={16} /><span>{exporting ? 'Exporting…' : 'Export model'}</span></button>
+      </nav>
+    </header>
+
+    <div className="workspace">
+      <Assembly selected={selected} onSelect={select} hidden={hidden} extracted={extracted} open={drawer} onClose={() => setDrawer(false)} onReset={reset} aiMode={aiMode} />
+      {drawer ? <button className="drawer-backdrop" onClick={() => setDrawer(false)} aria-label="Close component drawer" /> : null}
+      <main className={`explorer ${tab === 'path' ? 'with-path' : ''} ${aiMode ? 'ai-mode' : ''}`}>
+        <div className="canvas-heading">
+          <div><button className="mobile-assembly" onClick={() => setDrawer(true)}><PanelLeft size={16} />Assembly</button>
+            <h1>{aiMode ? 'Where AI meets hardware.' : 'Power, taken apart.'}</h1>
+            <p>{aiMode ? 'Define the task. Match a method. Plan the implementation.' : 'Explore the hardware behind isolated power conversion.'}</p>
+          </div>
+          <div className="concept-rating"><strong>400 V ↔ 48 V</strong><span>Concept architecture</span></div>
+        </div>
+        <Viewer ref={viewer} selected={selected} explosion={explosion} hidden={hidden} extracted={extracted} isolated={isolated} rotate={rotate} labels={labels} onSelect={select} highlightedIds={highlightedIds} highlightColor={aiColor} />
+        {aiMode ? <AIExplorer selectedPart={byId[selected]} activeId={activeAI?.id} phase={aiPhase} scope={aiScope}
+          onPhaseChange={changeAIPhase} onScopeChange={changeAIScope} onOpportunitySelect={chooseAI} onPartSelect={select}
+          onFocus={focusAI} onIsolate={toggleIsolation} onExit={() => setTab('overview')} />
+          : <div className="inspector-wrap"><Inspector key={selected} part={byId[selected]} hidden={hidden.has(selected)} extracted={extracted.has(selected)} isolated={isolated === selected}
+            onHide={() => setHidden(current => toggleSet(current, selected))} onExtract={() => setExtracted(current => toggleSet(current, selected))}
+            onIsolate={toggleIsolation} onFocus={() => viewer.current?.focus()} /></div>}
+
+        {aiMode ? <div className="ai-model-legend" role="status" style={{ '--phase-color': aiColor }}><i /><span>{activeAI ? `${highlightedVisible} / ${highlightedIds.length} application targets visible` : 'Select a phase or another component'}<small>{activeAI ? `${AI_PHASES.find(item => item.id === activeAI.phase)?.label} · ${activeAI.title}` : 'No targets for the current filter'}</small></span></div> : null}
+        <div className="scene-status"><span className="status-dot" />{isolated ? (hidden.has(isolated) ? 'Isolated part hidden' : '1 part isolated') : `${components.length - hidden.size} of ${components.length} parts visible`}{extracted.size > 0 ? <span> · {extracted.size} pulled out</span> : null}</div>
+        <div className="axis" aria-hidden="true"><span className="axis-y">Y</span><span className="axis-z">Z</span><span className="axis-x">X</span><svg width="60" height="60"><path d="M20 40V7M20 40l29-11M20 40l25 14" fill="none" strokeWidth="2" stroke="#7d9990" /><circle cx="20" cy="40" r="3" fill="#117766" /></svg></div>
+        <Controls explosion={explosion} onExplosion={setExplosion} rotate={rotate} onRotate={() => setRotate(!rotate)} labels={labels} onLabels={() => setLabels(!labels)} view={view} onView={changeView} onReset={reset} onFit={() => viewer.current?.preset(view)} />
+        {tab === 'path' ? <PowerPath step={step} onStep={setStage} onClose={() => setTab('overview')} /> : null}
+      </main>
+    </div>
+
+    <footer className="app-footer">
+      <div role="tablist" aria-label="Explorer mode">
+        <button role="tab" aria-selected={tab === 'overview'} className={tab === 'overview' ? 'selected' : ''} onClick={() => setTab('overview')}>Overview</button>
+        <button role="tab" aria-selected={tab === 'path'} className={tab === 'path' ? 'selected' : ''} onClick={() => { setTab('path'); setStage(step); }}>Power path</button>
+        <button role="tab" aria-selected={aiMode} className={aiMode ? 'selected' : ''} onClick={enterAI}><BrainCircuit size={13} />AI opportunities</button>
+      </div>
+      <p>{aiMode ? 'Framework-based proposals · No trained AI models.' : 'Illustrative model · Not a fabrication design.'}</p>
+      <button className="footer-info icon-button" onClick={() => setAbout(true)} aria-label="About this model"><Info size={17} /></button>
+    </footer>
+    {notice ? <div className="toast" role="status"><Check size={17} />{notice}</div> : null}
+    {about ? <AboutDialog onClose={closeAbout} onTour={startTour} onAI={enterAI} /> : null}
+  </div>;
 }
