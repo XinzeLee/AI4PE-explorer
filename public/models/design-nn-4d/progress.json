@@ -1,1 +1,0 @@
-{"status":"complete","mainTotal":256,"mainComplete":256,"stage":"main-4mm","failures":[],"lastCompleted":"design4d_255","architecture":[4,64,64,1],"testMetrics":{"count":48,"maeNH":0.06507522457469612,"rmseNH":0.08463320501493507,"maxErrorNH":0.2252252527051226,"mapePercent":0.41108125289853875}}

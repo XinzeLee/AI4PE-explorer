@@ -4,6 +4,10 @@ dist/
 .sites-local/
 .DS_Store
 .npm-cache/
+__pycache__/
+*.pyc
+*.nbc
+*.nbi
 .openai/rul-source/
 .openai/design-nn/
 .openai/design-nn-4d/

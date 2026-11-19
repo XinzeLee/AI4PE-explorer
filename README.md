@@ -31,14 +31,11 @@ npm run dev -- --port 4173
 
 Open the address printed in the terminal, usually [http://127.0.0.1:4173/](http://127.0.0.1:4173/). Drag to orbit the model, scroll to zoom, and click a component to learn about it. The application and its neural-network inference run in the browser; no separate inference server is required.
 
-## Publish on GitHub Pages
-
-This project includes a GitHub Actions workflow for building and hosting the interactive site. See the [GitHub Pages guide](docs/github-pages.md) for deployment and future updates.
-
 ## Sources and further reading
 
 - [Fundamentals of AI for Power Electronics](https://github.com/XinzeLee/Fundamentals_of_AI_for_PE)
-- [ECCE2025 DAB tutorial and data](https://github.com/XinzeLee/ECCE2025)
-- Model details and source attribution: [Design](docs/design-nn-4d-model.md) · [Control](docs/control-nn-model.md) · [Maintenance](docs/rul-nn-model.md)
+- [ECCE2025 DAB tutorial and data](https://github.com/XinzeLee/ECCE2025/tree/1732da388f18b80e3fb6ad2ed0480c53f42c9250)
+- [IGBT remaining-life case study](https://github.com/XinzeLee/Fundamentals_of_AI_for_PE/tree/0587acf5854b0127f696c13e0367663d24f6ae73/9_Case_Studies_PE/IGBT_Maintenance)
+- [PowerSynth source and benchmark attribution](public/models/design-nn/source/THIRD_PARTY.md)
 
-Created by **Xinze Li**. The project includes third-party materials with their own license notices; see the linked model records for details.
+Created by **Xinze Li**. The project includes third-party materials with their own license notices, including the [PowerSynth GPL license](public/models/design-nn/source/LICENSE-GPL-3.0.txt) and the [IGBT case-study notice](public/models/rul-nn/source/NOTICE).
