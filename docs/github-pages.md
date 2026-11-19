@@ -12,16 +12,18 @@ The app is a static Vite website. GitHub Actions can build it and publish the `d
    git add -A
    git diff --cached --stat
    git commit -m "Prepare converter explorer for GitHub Pages"
+   git remote -v
+   # Run the next command only when no origin is configured.
    git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
    git push -u origin main
    ```
 
-   The repository currently has no Git remote. If you later configure one, inspect it with `git remote -v` instead of adding another `origin`. Review the staged files and use `git diff --cached` before committing; the project includes model data, source snapshots and reproduction scripts. GitHub may prompt you to authenticate.
+   Check `git remote -v` first. If an `origin` is already configured, use its existing address instead of adding another one. Review the staged files and use `git diff --cached` before committing; the project includes model data, source snapshots and reproduction scripts. GitHub may prompt you to authenticate.
 
 3. In the new repository, open **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**. If a workflow was skipped before Pages was enabled, open **Actions → Deploy GitHub Pages → Run workflow**.
 4. Wait for the workflow to finish. The Pages settings or the deployment job will show the published URL. For a project repository it normally has the form `https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/`.
 
-5. Replace both placeholder URLs in [README.md](../README.md) with the actual Pages URL. Then open [ModelRepositoryLink.jsx](../src/ModelRepositoryLink.jsx) and replace `MODEL_REPOSITORY_URL` with the **repository URL**, such as `https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`. This connects the GitHub icon in the site's header to the source repository. Commit and push those changes to update the README and redeploy the site:
+5. If you are publishing your own copy, update both play links in [README.md](../README.md) to your Pages URL. Then open [ModelRepositoryLink.jsx](../src/ModelRepositoryLink.jsx) and set `MODEL_REPOSITORY_URL` to your **repository URL**, such as `https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`. This connects the GitHub icon in the site's header to the source repository. Commit and push those changes to update the README and redeploy the site:
 
    ```powershell
    git add README.md src/ModelRepositoryLink.jsx

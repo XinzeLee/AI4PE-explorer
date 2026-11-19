@@ -4,11 +4,9 @@ Explore the basics of artificial intelligence for power electronics through an i
 
 ## Explore the 3D model
 
-### [▶ Play the 3D model](https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/)
+[![Play the interactive 3D model](https://img.shields.io/badge/%E2%96%B6-PLAY%20THE%203D%20MODEL-117766?style=for-the-badge)](https://xinzelee.github.io/AI4PE-explorer/)
 
-**The play link and screenshot link are placeholders.** Replace both with the published GitHub Pages URL after the site is deployed.
-
-[![The 3D power converter explorer, showing the converter and its components](docs/images/explorer.png)](https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/)
+[![The 3D power converter explorer, showing the converter and its components](docs/images/explorer.png)](https://xinzelee.github.io/AI4PE-explorer/)
 
 Rotate and zoom the conceptual dual-active-bridge converter, select its components, and separate or reassemble the hardware. Explore its semiconductors, capacitors, magnetics, gate drivers, control board, heatsink, and EMI filter.
 
@@ -35,7 +33,7 @@ Open the address printed in the terminal, usually [http://127.0.0.1:4173/](http:
 
 ## Publish on GitHub Pages
 
-This project includes a GitHub Actions workflow for building and hosting the interactive site. Follow the step-by-step [GitHub Pages guide](docs/github-pages.md), then replace the placeholder play URL in this README with your published address.
+This project includes a GitHub Actions workflow for building and hosting the interactive site. See the [GitHub Pages guide](docs/github-pages.md) for deployment and future updates.
 
 ## Sources and further reading
 

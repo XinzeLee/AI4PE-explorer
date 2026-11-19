@@ -178,12 +178,12 @@ export const ConverterDesignOverview = forwardRef(function ConverterDesignOvervi
     <aside ref={workflow} className="converter-design-workflow" aria-label="AI-assisted converter design workflow">
       <h2 className="design-workflow-caption">An AI-assisted design loop</h2>
       <div className="design-flow-nodes">
-        <a ref={nn} className="design-flow-node design-neural-node design-nn-link" href={DESIGN_LAB_URL} onClick={onOpenNNLab} aria-label="Explore geometry to loop inductance">
+        <a ref={nn} className="design-flow-node design-neural-node design-nn-link nn-interactive-card" href={DESIGN_LAB_URL} onClick={onOpenNNLab} aria-label="Explore geometry to loop inductance">
           <h3>NN surrogate</h3>
           <NeuralNetwork portRefs={portRefs} />
           <p>Geometry · materials<br />Operating conditions</p>
           <small>Illustrative architecture</small>
-          <span className="design-nn-cta">Explore geometric variables → loop inductance <span aria-hidden="true">↗</span></span>
+          <span className="design-nn-cta nn-interactive-cta">Explore geometric variables → loop inductance <span aria-hidden="true">→</span></span>
         </a>
         <section ref={model} className="design-flow-node design-model-node" aria-label="Performance and multiphysics estimates">
           <h3>Performance /<br />multi-physics estimates</h3>

@@ -13,6 +13,35 @@
 .control-nn-cta { display: block; padding-top: 9px; color: #236e53; font-size: 10px; font-weight: 650; line-height: 1.45; }
 .nn-lab-loading { padding: 15vh 8vw; color: #346551; font: 16px system-ui, sans-serif; }
 
+/* These three cards open the interactive neural-network examples. */
+.nn-interactive-card {
+  border-color: #65a986;
+  background: #f2faf5;
+  box-shadow: 0 0 0 1px #65a98655, 0 4px 14px #265b3a12;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.nn-interactive-card:hover {
+  border-color: #277b5b;
+  background: #e8f5ed;
+  box-shadow: 0 0 0 2px #63a88177, 0 5px 15px #265b3a1a;
+}
+.nn-interactive-card:focus-visible { outline: 3px solid #17775f; outline-offset: 4px; }
+.nn-interactive-card .nn-interactive-cta {
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: #277c5e;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.nn-interactive-card .nn-interactive-cta > span { white-space: nowrap; }
+@media(prefers-reduced-motion: reduce) { .nn-interactive-card { transition: none; } }
+
 /* The lab name stays readable alongside the three workflow links. */
 .topbar .brand-astra { flex: 0 1 410px; min-width: 0; gap: 0; }
 .topbar .brand-astra > .brand-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; margin: 0; color: inherit; }
