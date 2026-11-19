@@ -1,4 +1,4 @@
-# Fundamentals of Artificial Intelligence for Power Electronics
+# Explore the Application of Artificial Intelligence in Power Electronics
 
 Explore the basics of artificial intelligence for power electronics through an interactive 3D converter and hands-on neural-network examples. The site connects physical hardware to three areas where AI can support engineering: **design, control, and maintenance**.
 
