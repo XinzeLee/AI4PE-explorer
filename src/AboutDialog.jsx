@@ -23,7 +23,6 @@ export function AboutDialog({ onClose, onTour }) {
   return <div className="modal-backdrop" onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="about-dialog" role="dialog" aria-modal="true" aria-labelledby="about-title">
       <button ref={closeButton} className="icon-button modal-close" aria-label="Close explanation" onClick={onClose}><X /></button>
-      <div className="about-mark" aria-hidden="true">A</div>
       <h2 id="about-title">A closer look at conversion.</h2>
       <p>This conceptual 3 kW dual active bridge (DAB) links a 400 V DC bus and a 48 V DC bus through a high-frequency transformer.</p>
       <div className="about-diagram"><span>400 V<br /><b>HV bridge</b></span><span>↔</span><span>Transfer L<br /><b>Transformer</b></span><span>↔</span><span>48 V<br /><b>LV bridge</b></span></div>
