@@ -14,7 +14,7 @@ import { DESIGN_GROUPS, DESIGN_TARGETS } from './converterDesignData';
 import { CONTROL_GROUPS, CONTROL_TARGETS } from './converterControlData';
 import { MAINTENANCE_GROUPS, MAINTENANCE_TARGETS } from './converterMaintenanceData';
 import { byId, components, steps } from './data';
-import { pageUrl, readPageRoute, sitePath } from './controlLabNavigation';
+import { pageUrl, readPageRoute } from './controlLabNavigation';
 
 const ControlNNLab = lazy(() => import('./ControlNNLab.jsx'));
 const RULLab = lazy(() => import('./RULLab.jsx'));
@@ -221,7 +221,7 @@ export default function App() {
   }, [selected, reset, about, storyOpen, closeStory, labOpen]);
   return <><div hidden={labOpen} inert={labOpen ? true : undefined} className={`app ${storyOpen ? 'design-active' : ''} ${controlOpen ? 'control-active' : ''} ${maintenanceOpen ? 'maintenance-active' : ''}`}>
     <header className="topbar">
-      <a className="brand brand-astra" href={sitePath()} aria-label="Astra Lab home"><span className="brand-copy"><strong><u>ASTRA</u> Lab</strong><small><span>Next-generation <u>A</u>I for <u>S</u>emiconductors and power elec<u>T</u>ronics</span><span>- <u>R</u>esearch and <u>A</u>dvancements</span></small></span></a>
+      <a className="brand brand-astra" href="https://xinzelee.github.io/" aria-label="Visit Xinze Li's homepage"><span className="brand-copy"><strong><u>ASTRA</u> Lab</strong><small><span>Next-generation <u>A</u>I for <u>S</u>emiconductors and power elec<u>T</u>ronics</span><span>- <u>R</u>esearch and <u>A</u>dvancements</span></small></span></a>
       <nav aria-label="Main navigation">
         <button className={!storyOpen ? 'nav-active nav-explorer' : 'nav-explorer'} onClick={() => { setAbout(false); if (storyOpen) closeStory('overview'); else setTab('overview'); }}>Explorer</button>
         <button aria-label="AI for converter design" className={`nav-ai nav-design ${designOpen ? 'nav-active' : ''}`} onClick={openDesign}><BrainCircuit size={15} /><span className="nav-full-label">AI for converter design</span><span className="nav-compact-label">Design</span></button>

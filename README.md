@@ -4,7 +4,7 @@ Explore the basics of artificial intelligence for power electronics through an i
 
 ## Explore the 3D model
 
-[![Play the interactive 3D model](https://img.shields.io/badge/%E2%96%B6-PLAY%20THE%203D%20MODEL-117766?style=for-the-badge)](https://xinzelee.github.io/AI4PE-explorer/)
+<a href="https://xinzelee.github.io/AI4PE-explorer/"><img src="docs/images/play-3d-model.svg" width="320" alt="Play the interactive 3D model"></a>
 
 [![The 3D power converter explorer, showing the converter and its components](docs/images/explorer.png)](https://xinzelee.github.io/AI4PE-explorer/)
 
