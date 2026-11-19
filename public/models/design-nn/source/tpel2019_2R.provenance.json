@@ -1,0 +1,29 @@
+{
+  "source": "e3da/PowerSynth2-pkg/work/Sample_Designs/2D_Case_2R",
+  "revision": "a1de7ced949c0fd0105d166767b1de8705eb65ab",
+  "source_readme_links_paper": true,
+  "paper": "Evans et al., TPEL 2019, pp. 5063-5078",
+  "status": "Official paper-linked benchmark copper/footprints with explicitly adapted pin and wire technology; not a replica of Fig. 8 hardware.",
+  "unchanged": [
+    "45 x 50 mm substrate",
+    "All seven copper rectangles",
+    "All four die footprints",
+    "All five lead footprints",
+    "Eight wire-group endpoint roles"
+  ],
+  "coordinate_transform_mm": [
+    -5,
+    -5
+  ],
+  "adaptations": [
+    "High-side dies D3/D4 use 180-degree pin orientation to face the central gate trace.",
+    "Bond origins use MOSFET.part physical pad centers instead of the legacy script's point placeholders.",
+    "Trace landings follow die-pin x coordinates, enforcing vertical Manhattan wires.",
+    "Physical trace landing pads are 0.5 mm squares; the legacy 0.25 mm markers are symbolic points.",
+    "Wire heights are assumed 1 mm because the source technology file does not specify them.",
+    "Power and gate wire diameters are 0.3 and 0.1 mm; conductivities follow the paper.",
+    "The source 0.835 mm ceramic gap is retained, not replaced by the Fig. 8 vehicle's 0.635 mm value.",
+    "Frequency is explicitly 100 kHz; device links are near-ideal for packaging-parasitic extraction.",
+    "Backside copper is included as an electrically floating passive plane."
+  ]
+}

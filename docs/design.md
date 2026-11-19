@@ -25,4 +25,12 @@ Topology overview: https://www.ti.com/tool/TIDA-010054 (a separate 10 kW referen
 
 ## Verification at release
 
-Browser: Codex in-app browser. Desktop and 390 � 844 mobile. All 29 component selections verified against the inspector. Verified extraction/return, isolate, hide/show, reset, search/empty state, explosion, camera presets, mobile drawer and detail expansion, explanation dialog, and all five power-path stages. GLB binary parsed successfully: 29 unique component roots across eight categories, 679 meshes. Production build passes. Browser console has no current runtime errors after fixes. Native touch gestures and other browsers have not been tested.
+### Current 31-part model
+
+The mechanical refinement retains 31 separately selectable roots and a clean solder-mask surface. Switches have continuous tab–insulator–rail–column–baseplate thermal contact, fixed bent leads and matching drills. Terminal/driver collisions are removed; capacitors, magnetic cradles, filter spacers and the control socket have seating surfaces. Transformer and choke windings clear their ferrite, and the choke has two continuous windings with four terminals. The top camera keeps the full assembly in frame.
+
+All 52 tests pass, including actual mesh contacts, bore rays, pin boundaries, preview extrema, winding geometry, shading normals and canonical export. Browser checks cover all component selections, independent extraction, isolation, explosion, top/3D views, mobile selection, and design/control/maintenance anchors with state restoration. The final GLB was downloaded while a part was extracted and parsed: 31 unique named component roots, 779 meshes, 35 embedded images; every root matches its canonical assembled position. Export leaves the live extracted state intact and emits no new runtime warning. Production build passes. These are geometric and software checks; no electrical, thermal or insulation compliance is claimed.
+
+### Initial prototype (historical)
+
+Browser: Codex in-app browser. Desktop and 390 × 844 mobile. All 29 component selections verified against the inspector. Verified extraction/return, isolate, hide/show, reset, search/empty state, explosion, camera presets, mobile drawer and detail expansion, explanation dialog, and all five power-path stages. GLB binary parsed successfully: 29 unique component roots across eight categories, 679 meshes. Production build passes. Browser console has no current runtime errors after fixes. Native touch gestures and other browsers have not been tested.

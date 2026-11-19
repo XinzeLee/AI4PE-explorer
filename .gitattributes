@@ -1,0 +1,4 @@
+# These files are tied to recorded SHA-256 provenance and must retain their
+# original bytes when cloned on Windows, Linux, or macOS.
+public/models/** -text diff
+scripts/** -text diff

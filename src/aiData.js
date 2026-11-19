@@ -19,7 +19,7 @@ const switches = Array.from({ length: 8 }, (_, i) => `Q${i + 1}`);
 const caps = Array.from({ length: 6 }, (_, i) => `C${i + 1}`);
 const drivers = Array.from({ length: 4 }, (_, i) => `GD${i + 1}`);
 const magnetic = ['T1', 'L1'];
-const emi = ['EMI1', 'LCM1', 'CX1', 'CX2', 'PCB1'];
+const emi = ['EMI1', 'LCM1', 'CX1', 'CX2', 'PCB1', 'BB1', 'BB2'];
 const reference = (section, label = 'Paper framework') => ({ label, section, url: AI_SOURCE.url });
 
 export const aiOpportunities = [
@@ -111,12 +111,12 @@ export const aiOpportunities = [
   },
   {
     id: 'dab-modulation', title: 'Choose efficient DAB modulation', phase: 'control',
-    task: 'Policy approximation / constrained control', modality: 'Tabular operating points + ordered signals', partIds: ['CTRL1', ...magnetic, ...switches],
-    summary: 'Use an offline optimizer or simulator to create a compact online phase-shift policy.',
+    task: 'Policy approximation / constrained control', modality: 'Tabular operating points + ordered signals', partIds: ['CTRL1', 'J2', ...drivers, ...magnetic, ...switches],
+    summary: 'Use an offline optimizer or simulator to create a compact online modulation policy. The control story illustrates a related NN feedback controller.',
     algorithms: ['PIML current-stress / ZVS surrogate + optimizer', 'Compact neural-network modulator / lookup table', 'RL as a simulation-trained alternative'],
     rationale: 'A compact imitation of an optimized policy may fit an embedded target. RL is an alternative only when the simulator, reward and constraint handling are credible; it is not a mandatory replacement for classical control.',
-    inputs: ['Bus voltages, requested power and operating direction', 'Measured/estimated link current, temperature and magnetic parameters', 'Optimized policy labels, or simulator transitions/rewards for the RL alternative'],
-    outputs: ['Bounded phase-shift / modulation commands'],
+    inputs: ['Bus voltages, voltage reference, requested power and operating direction', 'Output-voltage/current feedback, measured/estimated link current, temperature and magnetic parameters', 'Optimized policy labels, or simulator transitions/rewards for the RL alternative'],
+    outputs: ['Bounded phase-shift or duty commands for the chosen modulation scheme'],
     how: ['Generate training conditions over forward/reverse power and light/full load; preserve ZVS/current constraints.', 'Train and compare against conventional modulation; evaluate a LUT before increasing model complexity.', 'Quantize/prune only after validating errors; measure execution on the actual MCU/DSP/FPGA and keep conventional fallback control.'],
     training: 'Offline workstation / simulator. No unconstrained online exploration on the converter.',
     runtime: 'Compact inference or LUT on CTRL1 if measured worst-case execution fits its control budget; optimization can remain offline.',
@@ -211,7 +211,7 @@ export const aiOpportunities = [
   },
   {
     id: 'connection-health', title: 'Screen terminal / connection anomalies', phase: 'maintenance',
-    task: 'Condition regression / anomaly detection', modality: 'Tabular measurements + slow time series', partIds: ['J1', 'J2', 'PCB1'],
+    task: 'Condition regression / anomaly detection', modality: 'Tabular measurements + slow time series', partIds: ['J1', 'J2', 'PCB1', 'BB1', 'BB2'],
     summary: 'Monitor connection resistance or local heating where suitable measurements are added.',
     algorithms: ['Simple resistance / thermal baseline', 'Tree-based regression or one-class screening', 'Physics-informed residual model'],
     rationale: 'Normalize voltage drop and temperature by current before adding model complexity. A well-measured physical baseline may be sufficient without AI.',

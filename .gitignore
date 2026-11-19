@@ -4,3 +4,6 @@ dist/
 .sites-local/
 .DS_Store
 .npm-cache/
+.openai/rul-source/
+.openai/design-nn/
+.openai/design-nn-4d/

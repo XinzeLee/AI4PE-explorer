@@ -2,6 +2,9 @@ import { useEffect, useId, useState } from 'react';
 import { ArrowUpRight, BrainCircuit, ChevronDown, Eye, Focus, Scan, X } from 'lucide-react';
 import { AI_PHASES, AI_SOURCE, aiOpportunities } from './aiData';
 import { byId } from './data';
+import { DESIGN_INSIGHTS } from './converterDesignData';
+import { CONTROL_INSIGHTS } from './converterControlData';
+import { MAINTENANCE_INSIGHTS } from './converterMaintenanceData';
 import './ai.css';
 
 const detailTabs = [
@@ -19,6 +22,7 @@ export function AIExplorer({
   selectedPart, activeId, phase = 'all', scope = 'part',
   onPhaseChange, onScopeChange, onOpportunitySelect, onPartSelect,
   onFocus, onIsolate, onExit,
+  onStartDesign, onStartControl, onStartMaintenance, onRevealTargets,
 }) {
   const [detailTab, setDetailTab] = useState('what');
   const [collapsed, setCollapsed] = useState(false);
@@ -92,6 +96,9 @@ export function AIExplorer({
         <div className="ai-active-phase" style={{ '--phase-color': activePhase?.color || '#117766' }}><i />{activePhase?.label}<span>Illustrative use case</span></div>
         <h3>{active.title}</h3>
         <p className="ai-summary">{active.summary}</p>
+        {DESIGN_INSIGHTS.includes(active.id) ? <button className="ai-design-launch primary" onClick={onStartDesign}><BrainCircuit size={14} />AI for converter design<ArrowUpRight size={13} /></button> : null}
+        {CONTROL_INSIGHTS.includes(active.id) ? <button className="ai-design-launch primary" onClick={onStartControl}><BrainCircuit size={14} />AI for converter control<ArrowUpRight size={13} /></button> : null}
+        {MAINTENANCE_INSIGHTS.includes(active.id) ? <button className="ai-design-launch primary" onClick={onStartMaintenance}><BrainCircuit size={14} />AI for converter maintenance<ArrowUpRight size={13} /></button> : null}
 
         <div className="ai-detail-tabs" role="tablist" aria-label="What Which How framework">
           {detailTabs.map(item => <button key={item.id} id={`${instanceId}-${item.id}-tab`} role="tab" type="button" aria-selected={detailTab === item.id} aria-controls={`${instanceId}-${item.id}-panel`} tabIndex={detailTab === item.id ? 0 : -1} onClick={() => setDetailTab(item.id)} onKeyDown={changeDetailTab} className={detailTab === item.id ? 'selected' : ''}><strong>{item.label}</strong><small>{item.subtitle}</small></button>)}
@@ -118,7 +125,7 @@ export function AIExplorer({
 
         <div className="ai-hardware-actions" aria-label="Inspect application hardware">
           <button onClick={onFocus}><Focus size={14} />Focus in 3D</button>
-          <button onClick={() => onOpportunitySelect(active)}><Eye size={14} />Reveal targets</button>
+          <button onClick={() => onRevealTargets(active)}><Eye size={14} />Reveal targets</button>
           <button onClick={onIsolate} title={`Isolate the selected component, ${selectedPart.name}`}><Scan size={14} />Isolate {selectedPart.id}</button>
         </div>
         <div className="ai-application-reference"><span>Framework connection</span><a href={active.reference.url || AI_SOURCE.url} target="_blank" rel="noreferrer">{active.reference.label}<ArrowUpRight size={11} /></a><small>{active.reference.section}</small>{active.example ? <a className="ai-example-link" href={active.example.url} target="_blank" rel="noreferrer">{active.example.label}<ArrowUpRight size={11} /></a> : null}</div>

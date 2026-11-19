@@ -1,0 +1,21 @@
+.model-repo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d3ddd5;
+  border-radius: 6px;
+  color: #30483e;
+  text-decoration: none;
+  transition: background .16s, border-color .16s;
+}
+.model-repo-link:hover { background: #f1f6f3; border-color: #acc7bd; }
+.model-repo-link:focus-visible { outline: 2px solid #168d79; outline-offset: 3px; }
+.lab-header-actions { display: flex; align-items: center; gap: 16px; margin-left: auto; min-width: 0; }
+@media(max-width: 760px) {
+  .model-repo-link { width: 40px; height: 40px; }
+  .lab-header-actions { gap: 8px; }
+  .lab-header-actions > a:not(.model-repo-link) { max-width: 130px; font-size: 9px; line-height: 1.35; text-align: right; }
+}

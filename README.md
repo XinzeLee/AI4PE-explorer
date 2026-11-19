@@ -1,63 +1,46 @@
-# FLUX — Power Converter Explorer
+# Fundamentals of Artificial Intelligence for Power Electronics
 
-An educational, browser-based 3D hardware explorer for a conceptual 3 kW, 400 V / 48 V isolated dual active bridge converter. Built with React, Vite and Three.js; all geometry and textures are authored locally in code.
+Explore the basics of artificial intelligence for power electronics through an interactive 3D converter and hands-on neural-network examples. The site connects physical hardware to three areas where AI can support engineering: **design, control, and maintenance**.
 
-## Run
+## Explore the 3D model
+
+### [▶ Play the 3D model](https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/)
+
+**The play link and screenshot link are placeholders.** Replace both with the published GitHub Pages URL after the site is deployed.
+
+[![The 3D power converter explorer, showing the converter and its components](docs/images/explorer.png)](https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/)
+
+Rotate and zoom the conceptual dual-active-bridge converter, select its components, and separate or reassemble the hardware. Explore its semiconductors, capacitors, magnetics, gate drivers, control board, heatsink, and EMI filter.
+
+## Three ways to learn
+
+| Case study | What you can explore |
+| --- | --- |
+| **Design** | See a conceptual AI-assisted design workflow, then change power-module geometry and explore a neural-network estimate of loop inductance in 2D and 3D. |
+| **Control** | Follow an illustrated control workflow with triple-phase-shift waveforms, then use a companion DAB neural-network example to predict current stress and zero-voltage-switching counts. |
+| **Maintenance** | Explore how operating signals can inform condition monitoring, then inspect recorded IGBT waveforms with a neural-network estimate of remaining life and a 90% prediction interval. |
+
+The converter hardware and workflow diagrams are educational illustrations. The interactive neural-network playgrounds are separate research examples using fixed, locally evaluated models; their predictions are not measurements or validation of the pictured converter.
+
+## Run locally
+
+Install Node.js 22.12 or later, open a terminal in the project directory, and run:
 
 ```sh
-npm install
-npm run dev
+npm ci
+npm run dev -- --port 4173
 ```
 
-`npm run build` produces the static deployment in `dist/`. `npm run preview` serves the production build.
+Open the address printed in the terminal, usually [http://127.0.0.1:4173/](http://127.0.0.1:4173/). Drag to orbit the model, scroll to zoom, and click a component to learn about it. The application and its neural-network inference run in the browser; no separate inference server is required.
 
-## Explore
+## Publish on GitHub Pages
 
-- Orbit by dragging; zoom by scrolling or pinching; right-drag to pan.
-- Click a mesh or open a category in Assembly to select a part. Search by reference designator or name.
-- Pull any selected part out independently; return it with the same control.
-- Use the explosion slider or Assembled / Exploded buttons to separate the complete assembly.
-- Hide, show, isolate or focus a part. Reset restores every component and the camera.
-- Use the Top / Front / 3D views, component label toggle or auto rotation.
-- Follow five stages in Power path to learn how the DAB transfers energy.
-- Open **AI opportunities** to identify 15 proposed AI applications across design, control and maintenance. Select a component or explore all hardware; choosing an application outlines its physical targets in 3D.
-- A link ending in `/?mode=ai` opens directly in AI opportunities mode.
-- Read **What** for the task, data modality, inputs and outputs; **Which** for candidate methods and rationale; **How** for training, execution location, implementation and validation. The map distinguishes passive hardware targets from the computer performing the algorithm.
-- Export a GLB containing all 29 named component groups, materials and metadata, in assembled coordinates regardless of the current view.
+This project includes a GitHub Actions workflow for building and hosting the interactive site. Follow the step-by-step [GitHub Pages guide](docs/github-pages.md), then replace the placeholder play URL in this README with your published address.
 
-Keyboard shortcuts: **E** explode, **X** extract selected part, **I** isolate, **H** hide/show, **R** reset, **Escape** exit isolation. Shortcuts are disabled while typing or reading the explanatory dialog.
+## Sources and further reading
 
-## Component inventory
+- [Fundamentals of AI for Power Electronics](https://github.com/XinzeLee/Fundamentals_of_AI_for_PE)
+- [ECCE2025 DAB tutorial and data](https://github.com/XinzeLee/ECCE2025)
+- Model details and source attribution: [Design](docs/design-nn-4d-model.md) · [Control](docs/control-nn-model.md) · [Maintenance](docs/rul-nn-model.md)
 
-| System | Separable parts |
-| --- | --- |
-| Semiconductors | 4 HV SiC MOSFETs + 4 LV silicon MOSFETs |
-| Capacitors | 2 HV DC-link + 4 LV DC-link capacitors |
-| Magnetics | Isolation transformer + transfer inductor |
-| Gate drivers | 4 dual-channel gate driver boards |
-| Control | Digital control card |
-| Thermal | Finned aluminum heatsink |
-| EMI | Filter board, common-mode choke, 2 film capacitors |
-| Structure | Main PCB + 2 DC terminals |
-
-Small supporting ICs, screws, traces, pins and windings belong to their parent component groups. Every listed part has its own identity and transform. Model export preserves that hierarchy.
-
-## Architecture and limits
-
-`src/data.js` owns the inventory, component descriptions and power-path stages. `geometry.js` builds the named mesh hierarchy. `scene.js` owns rendering, picking, camera behavior, eased transforms, resource cleanup and export. The React components own the accessible UI and application state; animation does not trigger React rendering every frame.
-
-Targets, dimensions, electrical routing and thermal interfaces are illustrative. The app is not a circuit simulation, manufacturing model, reference-board reproduction or validated electrical/thermal/EMI design. Geometry uses arbitrary illustrative scene units.
-
-The educational DAB explanation is grounded in [TI’s TIDA-010054 topology reference](https://www.ti.com/tool/TIDA-010054), a separate 10 kW design. Our 3 kW / 400 V / 48 V assembly is conceptual. No credentials or runtime service are required by the frontend.
-
-## AI framework and tests
-
-The application map follows Li et al., *Fundamentals of Artificial Intelligence for Power Electronics*, IEEE TIE, 2026, DOI [10.1109/TIE.2026.3715958](https://doi.org/10.1109/TIE.2026.3715958), and the [author Algorithm Selector](https://github.com/XinzeLee/AI_for_PE_Algorithm_Selector). Framework attribution, source anchors and the proposed-application boundary are documented in `docs/ai-framework.md`.
-
-The 15 converter mappings are educational proposals, not trained models or paper-validated results for this concept hardware. No inference, model training, sensor stream, simulated AI performance or autonomous hardware control runs in the site. Additional instrumentation is identified where needed. Real-time inference is conditional on target-specific timing and validation; agents operate in an engineering tool environment outside the switching loop.
-
-`src/aiData.js` owns the source record, applications and filter helpers. `AIExplorer.jsx` and `ai.css` provide the responsive What / Which / How panel. `ai-integration.css` positions it within the retained explorer. Scene highlights are separate helper objects outside the exported hardware root and do not mutate shared mesh materials.
-
-Run `npm test` (or `node --test tests/ai-map.test.mjs`) for physical-target coverage, lifecycle/part filtering and complete framework records. Browser QA separately verifies rendered interactions, responsive layout and export.
-
-Design: `docs/design.md`. Hosting identity and static directory: `.openai/hosting.json`.
+Created by **Xinze Li**. The project includes third-party materials with their own license notices; see the linked model records for details.

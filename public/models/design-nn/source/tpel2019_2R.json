@@ -1,0 +1,818 @@
+{
+  "name": "TPEL 2019 linked official 2D_Case_2R reference - pin resolved",
+  "board_mm": [
+    45,
+    50
+  ],
+  "layers": [
+    {
+      "id": "back",
+      "z_mm": 0,
+      "thickness_mm": 0.2,
+      "resistivity_ohm_m": 1.6778523489932887e-08,
+      "patterned": false
+    },
+    {
+      "id": "top",
+      "z_mm": 1.035,
+      "thickness_mm": 0.2,
+      "resistivity_ohm_m": 1.6778523489932887e-08,
+      "patterned": true
+    }
+  ],
+  "regions": [
+    {
+      "id": "T1",
+      "net": "DC_MINUS",
+      "layer": "top",
+      "rect_mm": [
+        2.0,
+        2.0,
+        40.0,
+        6.0
+      ],
+      "min_size_mm": [
+        1,
+        1
+      ],
+      "fixed": true
+    },
+    {
+      "id": "T2",
+      "net": "SW",
+      "layer": "top",
+      "rect_mm": [
+        2.0,
+        10.0,
+        30.0,
+        8.0
+      ],
+      "min_size_mm": [
+        1,
+        1
+      ],
+      "fixed": true
+    },
+    {
+      "id": "T3",
+      "net": "SW",
+      "layer": "top",
+      "rect_mm": [
+        32.0,
+        10.0,
+        10.0,
+        32.0
+      ],
+      "min_size_mm": [
+        1,
+        1
+      ],
+      "fixed": true
+    },
+    {
+      "id": "T4",
+      "net": "SW",
+      "layer": "top",
+      "rect_mm": [
+        2.0,
+        42.0,
+        40.0,
+        4.0
+      ],
+      "min_size_mm": [
+        1,
+        1
+      ],
+      "fixed": true
+    },
+    {
+      "id": "T5",
+      "net": "GATE_LOW",
+      "layer": "top",
+      "rect_mm": [
+        2.0,
+        20.0,
+        26.0,
+        4.0
+      ],
+      "min_size_mm": [
+        1,
+        1
+      ],
+      "fixed": true
+    },
+    {
+      "id": "T6",
+      "net": "GATE_HIGH",
+      "layer": "top",
+      "rect_mm": [
+        2.0,
+        26.0,
+        26.0,
+        4.0
+      ],
+      "min_size_mm": [
+        1,
+        1
+      ],
+      "fixed": true
+    },
+    {
+      "id": "T10",
+      "net": "DC_PLUS",
+      "layer": "top",
+      "rect_mm": [
+        2.0,
+        32.0,
+        26.0,
+        8.0
+      ],
+      "min_size_mm": [
+        1,
+        1
+      ],
+      "fixed": true
+    },
+    {
+      "id": "BACKPLANE",
+      "net": "FLOATING_BACKPLANE",
+      "layer": "back",
+      "rect_mm": [
+        0,
+        0,
+        45,
+        50
+      ],
+      "min_size_mm": [
+        1.0,
+        1.0
+      ],
+      "fixed": true
+    }
+  ],
+  "components": [
+    {
+      "id": "D1",
+      "parent": "T2",
+      "rect_mm": [
+        8.0,
+        11.0,
+        4,
+        6
+      ],
+      "height_mm": 0.18,
+      "pins": [
+        {
+          "id": "D",
+          "offset_mm": [
+            2,
+            3,
+            0
+          ],
+          "contact_region": "T2",
+          "pad_mm": [
+            4,
+            6
+          ]
+        },
+        {
+          "id": "S",
+          "offset_mm": [
+            2.085,
+            2.6,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            3.5,
+            4.5
+          ]
+        },
+        {
+          "id": "G",
+          "offset_mm": [
+            1.28,
+            5.25,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            0.5,
+            0.5
+          ]
+        }
+      ],
+      "connections": [
+        {
+          "pins": [
+            "D",
+            "S"
+          ],
+          "states": [
+            "on"
+          ],
+          "resistance_ohm": 1e-06,
+          "inductance_h": 0
+        }
+      ],
+      "fixed": true,
+      "kind": "die"
+    },
+    {
+      "id": "D2",
+      "parent": "T2",
+      "rect_mm": [
+        17.0,
+        11.0,
+        4,
+        6
+      ],
+      "height_mm": 0.18,
+      "pins": [
+        {
+          "id": "D",
+          "offset_mm": [
+            2,
+            3,
+            0
+          ],
+          "contact_region": "T2",
+          "pad_mm": [
+            4,
+            6
+          ]
+        },
+        {
+          "id": "S",
+          "offset_mm": [
+            2.085,
+            2.6,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            3.5,
+            4.5
+          ]
+        },
+        {
+          "id": "G",
+          "offset_mm": [
+            1.28,
+            5.25,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            0.5,
+            0.5
+          ]
+        }
+      ],
+      "connections": [
+        {
+          "pins": [
+            "D",
+            "S"
+          ],
+          "states": [
+            "on"
+          ],
+          "resistance_ohm": 1e-06,
+          "inductance_h": 0
+        }
+      ],
+      "fixed": true,
+      "kind": "die"
+    },
+    {
+      "id": "D3",
+      "parent": "T10",
+      "rect_mm": [
+        14.0,
+        33.0,
+        4,
+        6
+      ],
+      "height_mm": 0.18,
+      "pins": [
+        {
+          "id": "D",
+          "offset_mm": [
+            2,
+            3,
+            0
+          ],
+          "contact_region": "T10",
+          "pad_mm": [
+            4,
+            6
+          ]
+        },
+        {
+          "id": "S",
+          "offset_mm": [
+            1.915,
+            3.4,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            3.5,
+            4.5
+          ]
+        },
+        {
+          "id": "G",
+          "offset_mm": [
+            2.7199999999999998,
+            0.75,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            0.5,
+            0.5
+          ]
+        }
+      ],
+      "connections": [
+        {
+          "pins": [
+            "D",
+            "S"
+          ],
+          "states": [
+            "on"
+          ],
+          "resistance_ohm": 1e-06,
+          "inductance_h": 0
+        }
+      ],
+      "fixed": true,
+      "kind": "die"
+    },
+    {
+      "id": "D4",
+      "parent": "T10",
+      "rect_mm": [
+        22.0,
+        33.0,
+        4,
+        6
+      ],
+      "height_mm": 0.18,
+      "pins": [
+        {
+          "id": "D",
+          "offset_mm": [
+            2,
+            3,
+            0
+          ],
+          "contact_region": "T10",
+          "pad_mm": [
+            4,
+            6
+          ]
+        },
+        {
+          "id": "S",
+          "offset_mm": [
+            1.915,
+            3.4,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            3.5,
+            4.5
+          ]
+        },
+        {
+          "id": "G",
+          "offset_mm": [
+            2.7199999999999998,
+            0.75,
+            0.18
+          ],
+          "contact_region": null,
+          "pad_mm": [
+            0.5,
+            0.5
+          ]
+        }
+      ],
+      "connections": [
+        {
+          "pins": [
+            "D",
+            "S"
+          ],
+          "states": [
+            "on"
+          ],
+          "resistance_ohm": 1e-06,
+          "inductance_h": 0
+        }
+      ],
+      "fixed": true,
+      "kind": "die"
+    },
+    {
+      "id": "L1",
+      "parent": "T1",
+      "rect_mm": [
+        4.0,
+        3.0,
+        3,
+        3
+      ],
+      "height_mm": 2,
+      "pins": [
+        {
+          "id": "P",
+          "offset_mm": [
+            1.5,
+            1.5,
+            2
+          ],
+          "contact_region": "T1",
+          "pad_mm": [
+            3,
+            3
+          ]
+        }
+      ],
+      "connections": [],
+      "fixed": true,
+      "kind": "lead"
+    },
+    {
+      "id": "L2",
+      "parent": "T3",
+      "rect_mm": [
+        36.0,
+        26.0,
+        3,
+        3
+      ],
+      "height_mm": 2,
+      "pins": [
+        {
+          "id": "P",
+          "offset_mm": [
+            1.5,
+            1.5,
+            2
+          ],
+          "contact_region": "T3",
+          "pad_mm": [
+            3,
+            3
+          ]
+        }
+      ],
+      "connections": [],
+      "fixed": true,
+      "kind": "lead"
+    },
+    {
+      "id": "L3",
+      "parent": "T5",
+      "rect_mm": [
+        4.0,
+        21.0,
+        1,
+        1
+      ],
+      "height_mm": 2,
+      "pins": [
+        {
+          "id": "P",
+          "offset_mm": [
+            0.5,
+            0.5,
+            2
+          ],
+          "contact_region": "T5",
+          "pad_mm": [
+            1,
+            1
+          ]
+        }
+      ],
+      "connections": [],
+      "fixed": true,
+      "kind": "lead"
+    },
+    {
+      "id": "L4",
+      "parent": "T6",
+      "rect_mm": [
+        4.0,
+        27.0,
+        1,
+        1
+      ],
+      "height_mm": 2,
+      "pins": [
+        {
+          "id": "P",
+          "offset_mm": [
+            0.5,
+            0.5,
+            2
+          ],
+          "contact_region": "T6",
+          "pad_mm": [
+            1,
+            1
+          ]
+        }
+      ],
+      "connections": [],
+      "fixed": true,
+      "kind": "lead"
+    },
+    {
+      "id": "L5",
+      "parent": "T10",
+      "rect_mm": [
+        4.0,
+        33.0,
+        3,
+        3
+      ],
+      "height_mm": 2,
+      "pins": [
+        {
+          "id": "P",
+          "offset_mm": [
+            1.5,
+            1.5,
+            2
+          ],
+          "contact_region": "T10",
+          "pad_mm": [
+            3,
+            3
+          ]
+        }
+      ],
+      "connections": [],
+      "fixed": true,
+      "kind": "lead"
+    }
+  ],
+  "terminals": [
+    {
+      "id": "B9",
+      "region": "T5",
+      "uv": [
+        0.3125,
+        0.28125
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D1.G",
+      "align_axis": "x"
+    },
+    {
+      "id": "B10",
+      "region": "T5",
+      "uv": [
+        0.6201923076923077,
+        0.28125
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D2.G",
+      "align_axis": "x"
+    },
+    {
+      "id": "B1",
+      "region": "T1",
+      "uv": [
+        0.203125,
+        0.9375
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D1.S",
+      "align_axis": "x"
+    },
+    {
+      "id": "B2",
+      "region": "T1",
+      "uv": [
+        0.403125,
+        0.9375
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D2.S",
+      "align_axis": "x"
+    },
+    {
+      "id": "B3",
+      "region": "T4",
+      "uv": [
+        0.353125,
+        0.28125
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D3.S",
+      "align_axis": "x"
+    },
+    {
+      "id": "B4",
+      "region": "T4",
+      "uv": [
+        0.553125,
+        0.28125
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D4.S",
+      "align_axis": "x"
+    },
+    {
+      "id": "B11",
+      "region": "T6",
+      "uv": [
+        0.5432692307692307,
+        0.53125
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D3.G",
+      "align_axis": "x"
+    },
+    {
+      "id": "B12",
+      "region": "T6",
+      "uv": [
+        0.8509615384615384,
+        0.53125
+      ],
+      "pad_mm": [
+        0.5,
+        0.5
+      ],
+      "position_mm": null,
+      "align_to": "D4.G",
+      "align_axis": "x"
+    }
+  ],
+  "bond_wires": [
+    {
+      "id": "BW1",
+      "source": "D1.G",
+      "target": "B9",
+      "diameter_mm": 0.1,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    },
+    {
+      "id": "BW2",
+      "source": "D2.G",
+      "target": "B10",
+      "diameter_mm": 0.1,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    },
+    {
+      "id": "BW3",
+      "source": "D1.S",
+      "target": "B1",
+      "diameter_mm": 0.3,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    },
+    {
+      "id": "BW4",
+      "source": "D2.S",
+      "target": "B2",
+      "diameter_mm": 0.3,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    },
+    {
+      "id": "BW5",
+      "source": "D3.S",
+      "target": "B3",
+      "diameter_mm": 0.3,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    },
+    {
+      "id": "BW6",
+      "source": "D4.S",
+      "target": "B4",
+      "diameter_mm": 0.3,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    },
+    {
+      "id": "BW7",
+      "source": "D3.G",
+      "target": "B11",
+      "diameter_mm": 0.1,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    },
+    {
+      "id": "BW8",
+      "source": "D4.G",
+      "target": "B12",
+      "diameter_mm": 0.1,
+      "loop_height_mm": 1,
+      "count": 1,
+      "pitch_mm": 0.4,
+      "segments": 8,
+      "resistivity_ohm_m": 2.6525198938992043e-08,
+      "max_length_mm": 15,
+      "planar_axis": "y"
+    }
+  ],
+  "loop": {
+    "source": "L5.P",
+    "sink": "L1.P",
+    "frequency_hz": 100000,
+    "device_states": {
+      "D1": "on",
+      "D2": "on",
+      "D3": "on",
+      "D4": "on"
+    },
+    "name": "DC commutation path"
+  },
+  "rules": {
+    "clearance_mm": 0.5,
+    "enclosure_mm": 0.5,
+    "edge_clearance_mm": 0.5,
+    "min_trace_width_mm": 1,
+    "component_spacing_mm": 0.5,
+    "net_clearance_mm": {}
+  },
+  "paths": [],
+  "schema_version": 1
+}

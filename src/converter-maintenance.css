@@ -1,0 +1,80 @@
+.converter-maintenance-overview{display:contents}
+@media(min-width:761px) and (max-width:1000px){
+  .explorer.design-mode.maintenance-mode{grid-template-columns:minmax(0,1fr);grid-template-rows:78px 300px max-content max-content;align-content:start;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}
+  .maintenance-mode .converter-maintenance-workflow{grid-column:1;grid-row:3;border-left:0;border-top:1px solid #dfe7db;overflow:visible}
+  .maintenance-mode .converter-maintenance-footer{grid-column:1;grid-row:4;display:block;padding:12px 20px 15px}
+  .converter-maintenance-footer>details{margin-top:7px}
+  .converter-maintenance-footer>details>div{position:static;max-width:none;width:auto;padding:9px 0 0;border:0;border-radius:0;box-shadow:none;background:none}
+}
+.converter-maintenance-heading h1{color:#2f4435}
+.maintenance-sensing-label{font-size:11px;line-height:1.4;color:#6d806c;background:#ffffffd9;border:1px solid #dbe5d5;border-radius:4px;padding:5px 7px}
+.maintenance-scope-label{position:absolute;left:20px;bottom:44px;font-size:11px;line-height:1.5;color:#6d856d;margin:0;background:#f4f5f2de;padding:3px 0}
+.converter-maintenance-workflow{gap:18px;padding:16px 18px}
+.maintenance-input-row{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:22px;flex:0 0 154px;min-height:0;min-width:0}
+.maintenance-observation-card,.maintenance-network-card{position:relative;min-width:0;border:1px solid #d8e4d2;border-radius:7px;background:white;padding:10px 12px;animation:maintenance-card-reveal .5s ease both}
+.maintenance-observation-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:3px}
+.maintenance-observation-heading h2{font-size:12px;line-height:1.4;font-weight:550;color:#4b7054;margin:0}
+.maintenance-replay{font-size:11px;line-height:1.4;padding:4px 6px;min-height:26px;border-color:#d7e4d1;color:#688666;background:#fbfdf9;gap:4px;flex-shrink:0}
+.maintenance-signal-window{position:relative;display:flex;min-height:0;height:72px;align-items:center;margin:0 0 5px}
+.maintenance-signal-window>:not(.maintenance-signal-port){width:100%;min-width:0}
+.maintenance-signal-window figure{display:flex;flex-direction:column;justify-content:center;min-width:0;width:100%;height:100%}
+.maintenance-signal-window svg{display:block;width:100%;height:0;flex:1 1 0;min-height:0}
+.maintenance-signal-window svg text{font-size:15px}
+.maintenance-signal-window figcaption{font-size:11px;line-height:1.4;flex-shrink:0}
+.maintenance-signal-port{position:absolute;left:-4px;z-index:2;width:7px;height:7px;border:1px solid white;border-radius:50%;transform:translate(-50%,-50%)}
+.maintenance-port-voltage{top:28%}.maintenance-port-current{top:67%}
+.maintenance-history-input{border:1px solid #e0e8db;border-radius:4px;padding:4px 7px;line-height:1.4;font-size:11px;color:#6d8266;background:#f7faf4;width:max-content;max-width:100%}
+.maintenance-network-card{text-align:center;animation:none;transition:opacity .35s ease}
+.maintenance-network-card h2{font-size:14px;font-weight:550;line-height:1.35;letter-spacing:-.15px;color:#466b4e;margin:0}
+.maintenance-neural-graph{display:block;width:100%;max-width:130px;height:73px;overflow:visible;margin:5px auto 0}
+.maintenance-neural-edges{stroke:#b7ceba;stroke-width:.8;opacity:.72}
+.maintenance-network-input{fill:#779d80;stroke:white;stroke-width:1.1}
+.maintenance-network-hidden{fill:#f7fbf4;stroke:#64916d;stroke-width:1.2}
+.maintenance-network-output{fill:#64916d;stroke:white;stroke-width:1.1}
+.maintenance-network-card p{font-size:11px;line-height:1.4;color:#71886c;margin:3px 0 0}
+.maintenance-parallel-heads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;flex:1 1 0;min-height:160px;min-width:0}
+.maintenance-output-head{position:relative;display:flex;flex-direction:column;min-height:0;min-width:0;border:1px solid #dce6d6;border-radius:7px;padding:10px 9px 8px;background:white;transition:opacity .35s ease}
+.maintenance-output-head>h3{font-size:13px;line-height:1.35;letter-spacing:-.12px;font-weight:550;color:#4a6c50;margin:0 0 5px;min-height:35px}
+.maintenance-head-chart{display:flex;flex:1 1 0;min-width:0;min-height:0}
+.maintenance-head-chart>figure{display:flex;flex:1 1 0;flex-direction:column;width:100%;height:100%;min-width:0;min-height:0}
+.maintenance-head-chart svg{display:block;flex:1 1 0;width:100%;height:0;min-height:0;max-height:100%}
+.maintenance-head-chart svg text{font-size:15px}
+.maintenance-health-direction{flex-shrink:0;font-size:11px;line-height:1.45;margin:3px 0 0;color:#657c5f}
+.maintenance-head-chart figcaption{flex-shrink:0;font-size:11px;line-height:1.45;padding-top:4px}
+.maintenance-assessment-card{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px;flex:0 0 auto;padding:11px 13px;border:1px solid #d4e2ce;border-radius:7px;background:#f6faf2;transition:opacity .35s ease,background .35s,border-color .35s}
+.maintenance-assessment-card h2{font-size:13px;font-weight:550;line-height:1.35;color:#456d4a;margin:0 0 4px}
+.maintenance-assessment-card>div>p{font-size:11px;line-height:1.4;color:#728a6a;margin:0}
+.maintenance-service-path{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;font-size:11px;line-height:1.5;color:#688762;margin:0;text-align:right}
+.maintenance-service-path>strong{font-weight:550;color:#4e774f}
+.maintenance-service-path>svg{color:#8fa587;flex-shrink:0}
+.maintenance-assessment-card[data-assessed=true]{border-color:#a8c59d;background:#edf6e7}
+.converter-maintenance-footer details>div{max-height:300px;overflow:auto;scrollbar-width:thin;overscroll-behavior:contain}
+.maintenance-leaders{fill:none}
+.maintenance-sensing-wires{animation:maintenance-card-reveal .8s ease .1s both}
+.maintenance-sensing-wires path{fill:none;stroke-width:1.15;opacity:.78;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.maintenance-sensing-wires>g>circle{stroke:#f4f5f2;stroke-width:1.2}
+.maintenance-sense-marker>circle{stroke-width:1.2}
+.maintenance-sense-marker>text{font-family:inherit;font-size:11px;font-weight:550;stroke:none}
+.maintenance-output-polarity{font-size:13px;font-weight:600;font-family:inherit;fill:#41584a;stroke:#f4f5f2;stroke-width:3;paint-order:stroke;stroke-linejoin:round}
+.maintenance-network-connections{stroke:#789780;stroke-width:1.05;fill:none;opacity:.72;vector-effect:non-scaling-stroke}
+.maintenance-network-connections path{transition:opacity .35s ease}
+.converter-maintenance-overview[data-phase="0"] .maintenance-network-card,.converter-maintenance-overview[data-phase="0"] .maintenance-feed-connection{opacity:0}
+.converter-maintenance-overview:is([data-phase="0"],[data-phase="1"]) .maintenance-output-head,.converter-maintenance-overview:is([data-phase="0"],[data-phase="1"]) .maintenance-branch-connection{opacity:0}
+.converter-maintenance-overview:not([data-phase="3"]) .maintenance-assessment-card,.converter-maintenance-overview:not([data-phase="3"]) .maintenance-assessment-connection{opacity:0}
+.maintenance-sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes maintenance-card-reveal{from{opacity:0}to{opacity:1}}
+@media(min-width:1001px) and (max-width:1300px){.explorer.design-mode.maintenance-mode{grid-template-columns:minmax(0,45%) minmax(0,55%)}}
+@media(min-width:1600px){.converter-maintenance-workflow{padding:20px 26px;gap:22px}.maintenance-input-row{flex-basis:166px;gap:26px}.maintenance-observation-card,.maintenance-network-card{padding:12px 15px}.maintenance-signal-window{height:79px}.maintenance-neural-graph{height:80px}.maintenance-output-head{padding:13px}.maintenance-output-head>h3{font-size:14px}}
+@media(max-width:1100px) and (min-width:761px){.converter-maintenance-workflow{padding-left:14px;padding-right:14px;gap:17px}.maintenance-input-row{gap:17px;flex-basis:158px}.maintenance-observation-card,.maintenance-network-card{padding-left:9px;padding-right:9px}.maintenance-observation-heading{gap:4px}.maintenance-observation-heading h2{font-size:11px}.maintenance-replay{padding-left:4px;padding-right:4px}.maintenance-network-card h2{font-size:13px}.maintenance-parallel-heads{gap:9px}.maintenance-output-head{padding-left:7px;padding-right:7px}.maintenance-output-head>h3{font-size:12px;min-height:34px}.maintenance-assessment-card{gap:10px}.maintenance-service-path{gap:5px}}
+@media(max-width:1000px){.converter-maintenance-heading h1{font-size:20px;letter-spacing:-.6px}.converter-maintenance-heading p{font-size:11px}.converter-maintenance-workflow{min-height:auto;height:auto;max-height:none;align-self:start;padding:18px 14px 20px;gap:24px}.maintenance-input-row{grid-template-columns:minmax(0,1fr);gap:18px;flex:none;min-height:0}.maintenance-observation-card{min-height:156px;padding:11px 13px}.maintenance-observation-heading h2{font-size:13px}.maintenance-signal-window{height:82px}.maintenance-network-card{min-height:153px;padding:12px}.maintenance-network-card h2{font-size:15px}.maintenance-neural-graph{height:81px;max-width:145px}.maintenance-network-card p{font-size:11px}.maintenance-parallel-heads{grid-template-columns:minmax(0,1fr);gap:18px;flex:none;min-height:0}.maintenance-output-head{height:190px;min-height:190px;padding:12px 13px}.maintenance-output-head>h3{font-size:14px;min-height:0;margin-bottom:5px}.maintenance-head-health{height:225px;min-height:225px}.maintenance-assessment-card{min-height:78px;padding:12px;gap:10px;align-items:flex-start}.maintenance-assessment-card h2{font-size:13px}.maintenance-service-path{max-width:56%;gap:5px;font-size:11px;align-self:center}.maintenance-service-path>span{max-width:140px}.maintenance-scope-label{left:14px;bottom:40px;font-size:11px;max-width:calc(100% - 28px)}.maintenance-sensing-label{font-size:11px;padding:4px 6px}.converter-maintenance-footer details>div{max-height:none;overflow:visible}}
+@media(max-width:380px){.converter-maintenance-heading h1{font-size:18px}.converter-maintenance-heading p{font-size:11px}.maintenance-sensing-label{padding-left:4px;padding-right:4px}.converter-maintenance-hardware-overlay .converter-design-hardware-top>strong{font-size:11px}.maintenance-service-path{max-width:54%}}
+@media(prefers-reduced-motion:reduce){.converter-maintenance-overview,.converter-maintenance-overview *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.maintenance-nn-link{color:inherit;text-decoration:none;display:block}
+.maintenance-nn-link:hover{border-color:#629772;background:#f7fbf4}
+.maintenance-nn-link:focus-visible{outline:3px solid #17775f;outline-offset:4px}
+.maintenance-nn-cta{display:block;font-size:10px;line-height:1.5;font-weight:550;color:#34734d;padding-top:8px}
+
+/* The research-example link adds one row to the original NN card. */
+@media(min-width:1001px){.maintenance-input-row{flex-basis:185px}}
+@media(min-width:1600px){.maintenance-input-row{flex-basis:198px}}
+@media(max-width:1000px){.maintenance-nn-link{min-height:185px}}

@@ -1,0 +1,35 @@
+.topbar nav{gap:22px}
+.topbar nav .nav-compact-label{display:none}
+.topbar nav .nav-ai{white-space:nowrap}
+@media(max-width:1100px){.topbar nav{gap:20px}.brand small,.brand>span{display:none}}
+@media(max-width:1300px){.topbar nav .nav-full-label{display:none}.topbar nav .nav-compact-label{display:inline}.topbar nav .nav-ai{font-size:12px}}
+@media(max-width:760px){.topbar nav{gap:12px}.topbar nav .nav-ai.nav-design,.topbar nav .nav-ai.nav-control,.topbar nav .nav-ai.nav-maintenance{font-size:11px;gap:4px}.topbar nav .nav-ai>svg{width:14px}}
+@media(max-width:520px){.topbar nav .nav-explorer{display:none}.topbar nav{gap:12px}}
+@media(max-width:380px){.topbar nav{gap:9px}.topbar nav .nav-ai>svg{display:none}}
+.app[hidden] { display: none !important; }
+.control-nn-link { color: inherit; text-decoration: none; }
+.control-nn-link:hover { border-color: #39775e; background: #f2f7f1; }
+.control-nn-link:focus-visible { outline: 3px solid #17775f; outline-offset: 4px; }
+.control-nn-cta { display: block; padding-top: 9px; color: #236e53; font-size: 10px; font-weight: 650; line-height: 1.45; }
+.nn-lab-loading { padding: 15vh 8vw; color: #346551; font: 16px system-ui, sans-serif; }
+
+/* The lab name stays readable alongside the three workflow links. */
+.topbar .brand-astra { flex: 0 1 410px; min-width: 0; gap: 0; }
+.topbar .brand-astra > .brand-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; margin: 0; color: inherit; }
+.topbar .brand-astra strong { font-size: 20px; line-height: 1; white-space: nowrap; letter-spacing: .02em; }
+.topbar .brand-astra strong u { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.topbar .brand-astra small { display: block; max-width: 410px; font-size: 10px; line-height: 1.25; letter-spacing: 0; text-transform: none; color: #66716e; }
+.topbar .brand-astra small span { display: block; }
+.topbar .brand-astra small u { text-decoration-thickness: 1px; text-underline-offset: 2px; }
+@media(max-width:1500px) and (min-width:761px){.topbar nav .nav-full-label{display:none}.topbar nav .nav-compact-label{display:inline}.topbar nav{gap:16px}.topbar .brand-astra{flex-basis:350px}}
+@media(max-width:760px){
+  .topbar { height: 104px; padding: 9px 17px 0; flex-wrap: wrap; align-content: space-between; }
+  .topbar .brand-astra { flex: 0 0 100%; }
+  .topbar .brand-astra > .brand-copy { gap: 4px; }
+  .topbar .brand-astra strong { font-size: 17px; }
+  .topbar .brand-astra small { display: block; font-size: 9px; max-width: 100%; }
+  .topbar nav { width: 100%; height: 41px; justify-content: space-between; }
+  .topbar nav>button { height: 100%; }
+  .assembly { top: 104px; }
+  .drawer-backdrop { top: 104px; }
+}
