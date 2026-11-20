@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { BrainCircuit, Info, PanelLeft } from 'lucide-react';
 import { ModelRepositoryLink } from './ModelRepositoryLink';
+import { CommunityCounter } from './CommunityCounter.jsx';
 import { Viewer } from './Viewer';
 import { Assembly } from './Assembly';
 import { Inspector } from './Inspector';
@@ -260,7 +261,7 @@ export default function App() {
         <button role="tab" aria-selected={tab === 'overview'} className={tab === 'overview' ? 'selected' : ''} onClick={() => { if (storyOpen) closeStory('overview'); else setTab('overview'); }}>Overview</button>
         <button role="tab" aria-selected={tab === 'path'} className={tab === 'path' ? 'selected' : ''} onClick={() => { if (storyOpen) closeStory('path'); setAbout(false); setTab('path'); setStage(step); }}>Power path</button>
       </div>
-      <p><span>Created by Xinze Li</span><span className="footer-description"> · {activeStory ? activeStory.footer : 'Illustrative model · Not a fabrication design.'}</span></p>
+      <p><CommunityCounter /><span>Created by Xinze Li</span><span className="footer-description"> · {activeStory ? activeStory.footer : 'Illustrative model · Not a fabrication design.'}</span></p>
       <button className="footer-info icon-button" onClick={() => setAbout(true)} aria-label="About this model"><Info size={17} /></button>
     </footer>
     {about ? <AboutDialog onClose={closeAbout} onTour={startTour} /> : null}
