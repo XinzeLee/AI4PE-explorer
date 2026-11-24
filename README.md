@@ -1,5 +1,18 @@
 # Explore the Application of Artificial Intelligence in Power Electronics
 
+<!-- clone-stats:start -->
+<p align="center">
+  <a href="https://github.com/XinzeLee/AI4PE-explorer/graphs/traffic">
+    <img src="https://img.shields.io/badge/Total_Clones-pending-7c3aed?style=flat-square" alt="Total tracked repository clones: pending" />
+  </a>
+  <a href="https://github.com/XinzeLee/AI4PE-explorer/graphs/traffic">
+    <img src="https://img.shields.io/badge/Unique_Clones-pending-b45309?style=flat-square" alt="Unique repository cloners in the past 14 days: pending" />
+  </a>
+</p>
+
+<p align="center"><sub>GitHub traffic · cumulative tracked clones · awaiting first update</sub></p>
+<!-- clone-stats:end -->
+
 Explore the basics of artificial intelligence for power electronics through an interactive 3D converter and hands-on neural-network examples. The site connects physical hardware to three areas where AI can support engineering: **design, control, and maintenance**.
 
 ## Explore the 3D model
